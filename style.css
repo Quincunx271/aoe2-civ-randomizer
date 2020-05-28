@@ -9,22 +9,29 @@
 .hwraplist li {
   list-style-type: none;
   float: left;
-  margin: 20px 0;
-}
-
-.hwraplist li a {
-  margin: 0 4px;
-  color:#eee;
-  padding: 10px 20px;
-  background:#3c66ad;
-  font-size:16px;
-  font-weight: bold;
-  
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  margin: 0;
 }
 
 figcaption {
   text-align: center;
+}
+
+figure {
+  margin: 0;
+}
+
+.block {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 104px;
+  font-weight: bold;
+
+  visibility: hidden;
+}
+
+button.civ {
+  position: relative;
 }
