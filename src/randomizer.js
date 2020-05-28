@@ -40,13 +40,34 @@ const CIVS = [
   { civ: "Lithuanians", wiki_sub: "0/0d" },
   { civ: "Tatars", wiki_sub: "f/f2" },
 ]
+CIVS.sort((a, b) => a.civ.localeCompare(b.civ))
 
 thelist = ''
 
 CIVS.forEach(({civ, wiki_sub}) => {
-  civitem = `<img id="${civ}" alt="${civ}" src="https://vignette.wikia.nocookie.net/ageofempires/images/${wiki_sub}/CivIcon-${civ}.png" />`
-  civitem = `<figure>${civitem}<figcaption>${civ}</figcaption></figure>`
+  civitem = `<img alt="${civ}" src="https://vignette.wikia.nocookie.net/ageofempires/images/${wiki_sub}/CivIcon-${civ}.png" width="104" height="104" />`
+  civitem = `<figure id="figure-${civ}">${civitem}<figcaption>${civ}</figcaption></figure>`
+  civitem = `<button id="${civ}" class="civ" type="button" onclick="civclicked(this)">${civitem}<span id="block-${civ}" class="block">&#10060;</span></button>`
   thelist += `    <li>${civitem}</li>\n`
 });
 
 document.getElementById('civdisplay').innerHTML = thelist
+
+civs = {}
+CIVS.forEach(({civ, ...rest}) => {
+  civs[civ] = true
+})
+
+function civclicked(b) {
+  civ = b.id
+  civs[b.id] = !civs[b.id]
+  
+  document.getElementById(`block-${b.id}`).style.visibility = civs[b.id] ? "" : "visible"
+}
+
+function randomize() {
+  pool = Object.keys(civs).filter(civ => civs[civ])
+  selection = pool[Math.floor(Math.random() * pool.length)]
+  document.getElementById("selection").innerHTML = document.getElementById(`figure-${selection}`).outerHTML
+  console.log(selection)
+}
